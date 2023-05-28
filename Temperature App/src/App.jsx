@@ -2,19 +2,36 @@ import React from "react";
 import { useState } from "react";
 
 const App = () => {
-  const [temperatureValue, settemperatureValue] = useState(10);
-  const [temperatureColor,setTemperatureColor]=useState("cold")
+  const [temperatureValue, setTemperatureValue] = useState(10);
+  const [temperatureColor, setTemperatureColor] = useState("cold");
 
-  
+  const increaseTemperature = () => {
+    const newTemperature = temperatureValue + 1;
+
+    if (newTemperature >= 15) {
+      setTemperatureColor('hot');
+    }
+    setTemperatureValue(newTemperature);
+  };
+
+  const decreaseTemperature = () => {
+    const newTemp = temperatureValue - 1;
+    if (newTemp < 15) {
+      setTemperatureColor('cold');
+    }
+    setTemperatureValue(newTemp);
+  };
+
+
   
   return (
     <div className="app-container">
-      <div classname="temperature=display-container">
+      <div className="temperature-display-container">
         <div className={`temperature-display ${temperatureColor}`}>{temperatureValue} C</div>
       </div>
       <div className="button-container">
-        <button onClick={() => settemperatureValue(temperatureValue+1)}>+</button>
-        <button onClick={()=>settemperatureValue(temperatureValue-1)}>-</button>
+        <button onClick={() => increaseTemperature()}>+</button>
+        <button onClick={() => decreaseTemperature()}>-</button>
       </div>
     </div>
   );
